@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import { SearchBar } from './components/SearchBar'
 import { AlunoCard } from './components/AlunoCard'
+import { HiMiniUserGroup } from "react-icons/hi2";
 
 export interface Aluno{
   id: number
@@ -70,15 +71,16 @@ export function App() {
         Sistema de Gestão de Alunos
       </div>
       <SearchBar onSearchChange={setSearch} />
-      <div className='cardsPadding' ref={cardsContainerRef}>
-        <div className='cards'>
-          {alunosFiltrados.length > 0 ? (
-              alunosFiltrados.map((aluno) => (
-                  <AlunoCard key={aluno.id} aluno={aluno} />
-              ))
-            ) : (
-              <p>Nenhum aluno encontrado.</p>
-            )}
+      <div className='containerCards'>
+        <div className='titleContainerCards'>
+          <HiMiniUserGroup />
+          <span>Alunos</span>
+        </div>
+        <span className='results'>{alunosFiltrados.length} alunos encontrados</span>
+        <div className='cards' ref={cardsContainerRef}>
+          {alunosFiltrados.map((aluno) => (
+            <AlunoCard key={aluno.id} aluno={aluno} />
+          ))}
         </div>
       </div>
     </div>

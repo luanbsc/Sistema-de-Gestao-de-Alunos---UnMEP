@@ -25,7 +25,9 @@
 
 .info{
     color: gray;
-    margin-left: 1.2rem;
+    font-family: Arial;
+    font-size: smaller;
+    margin-left: 1rem;
 }
 
 .inputSearchBar {
