@@ -27,7 +27,7 @@ export function App() {
   useEffect(() => {
     const fetchAlunos = async () => {
       try {
-        const resposta = await fetch("/api/alunos.json")
+        const resposta = await fetch("/alunos.json")
         if (!resposta.ok) throw new Error("Falha ao carregar JSON")
 
         const data: Aluno[] = await resposta.json()
