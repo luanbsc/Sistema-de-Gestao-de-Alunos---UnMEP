@@ -3,6 +3,7 @@ import './App.css'
 import { SearchBar } from './components/SearchBar'
 import { AlunoCard } from './components/AlunoCard'
 import { HiMiniUserGroup } from "react-icons/hi2";
+import { Filter } from './components/Filter'
 
 export interface Aluno{
   id: number
@@ -70,19 +71,28 @@ export function App() {
       <div className='title'>
         Sistema de Gestão de Alunos
       </div>
-      <SearchBar onSearchChange={setSearch} />
-      <div className='containerCards'>
-        <div className='titleContainerCards'>
-          <HiMiniUserGroup />
-          <span>Alunos</span>
+      <div className='panel'>
+        <div className='filter'>
+          <Filter />
         </div>
-        <span className='results'>{alunosFiltrados.length} alunos encontrados</span>
-        <div className='cards' ref={cardsContainerRef}>
-          {alunosFiltrados.map((aluno) => (
-            <AlunoCard key={aluno.id} aluno={aluno} />
-          ))}
+        <div className='centralizado'>
+          <SearchBar onSearchChange={setSearch} />
+          <div className='containerCards'>
+            <div className='titleContainerCards'>
+              <HiMiniUserGroup />
+              <span>Alunos</span>
+            </div>
+            <span className='results'>{alunosFiltrados.length} alunos encontrados</span>
+            <div className='cards' ref={cardsContainerRef}>
+              {alunosFiltrados.map((aluno) => (
+                <AlunoCard key={aluno.id} aluno={aluno} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
+      
+      
     </div>
   )
 }

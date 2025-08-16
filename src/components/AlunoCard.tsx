@@ -15,7 +15,7 @@ export function AlunoCard ({ aluno }: AlunoCardProps) {
               {(aluno.nota_1 + aluno.nota_2 + aluno.nota_3 + aluno.nota_4)/4 >= 7 && aluno.faltas < 7
                 ? <span className='approved'>Aprovado</span>
                 : <span className='failed'>Reprovado</span>
-                }
+              }
             </div>
             <div className='infos'>
               <div className='setInfo'>
@@ -24,19 +24,31 @@ export function AlunoCard ({ aluno }: AlunoCardProps) {
               </div>
               <div className='setInfo'>
                 <span className='infoTitle'>Nota 1: </span>
-                <span className='value'>{aluno.nota_1}</span>
+                {aluno.nota_1 !== null
+                  ? <span className='value'>{aluno.nota_1}</span>
+                  : <span className='value'>0</span>
+                }
               </div>
               <div className='setInfo'>
                 <span className='infoTitle'>Nota 2: </span>
-                <span className='value'>{aluno.nota_2}</span>
+                {aluno.nota_2 !== null
+                  ? <span className='value'>{aluno.nota_2}</span>
+                  : <span className='value'>0</span>
+                }
               </div>
               <div className='setInfo'>
                 <span className='infoTitle'>Nota 3: </span>
-                <span className='value'>{aluno.nota_3}</span>
+                {aluno.nota_3 !== null
+                  ? <span className='value'>{aluno.nota_3}</span>
+                  : <span className='value'>0</span>
+                }
               </div>
               <div className='setInfo'>
                 <span className='infoTitle'>Nota 4: </span>
-                <span className='value'>{aluno.nota_4}</span>
+                {aluno.nota_4 !== null
+                  ? <span className='value'>{aluno.nota_4}</span>
+                  : <span className='value'>0</span>
+                }
               </div>
             </div>
           </div>

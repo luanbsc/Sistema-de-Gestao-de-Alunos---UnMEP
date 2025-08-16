@@ -1,0 +1,22 @@
+.filterContainer {
+    display: flex;
+    width: 11rem;
+    height: 13rem;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgb(219, 219, 219);
+    flex-direction: column;
+}
+
+.presets {
+    display: flex;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    gap: 1rem;
+    align-items: center;
+}
+
+.filterTitle {
+    font-family: monospace;
+}

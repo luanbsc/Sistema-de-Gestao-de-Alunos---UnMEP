@@ -10,7 +10,6 @@ body, html, #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
   align-items: center;
   gap: 1rem;
 }
@@ -24,18 +23,9 @@ body, html, #root {
 
 .cards {
   width: 55rem;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   margin-top: 0.5rem;
-}
-
-.cardsPadding {
-  display: flex;
-  width: 55rem;
-  height: 31rem;
-  overflow-x: hidden;
-  justify-content: center;
-  align-items:center ;
 }
 
 .containerCards {
@@ -49,6 +39,7 @@ body, html, #root {
   border: 1px solid rgb(219, 219, 219);
   border-radius: 6px;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  padding-bottom: 2rem;
 }
 
 .titleContainerCards {
@@ -68,4 +59,21 @@ body, html, #root {
   font-size: smaller;
   margin-left: 1rem;
   margin-top: 0.5rem;
+}
+
+.filter {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.panel {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.centralizado {
+  margin-right: 12.5rem;
 }
