@@ -1,10 +1,38 @@
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
 .container {
+  display: flex;
+  flex-direction: column;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  align-items: center;
 }
 
 .title {
-  
+  font-family: monospace;
+  font-size: 32px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.cards {
+  width: 50rem;
+  flex-direction: column;
+  height: 30.5rem;
+  background-color: rgb(241, 241, 241);
+}
+
+.cardsPadding {
+  display: flex;
+  width: 55rem;
+  height: 31rem;
+  overflow-x: hidden;
+  justify-content: center;
+  align-items:center ;
 }

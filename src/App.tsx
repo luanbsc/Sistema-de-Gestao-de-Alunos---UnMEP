@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import { SearchBar } from './components/SearchBar'
+import { AlunoCard } from './components/AlunoCard'
 
-interface Aluno{
+export interface Aluno{
   id: number
   primeiro_nome: string
   ultimo_nome: string
@@ -20,6 +21,7 @@ export function App() {
   const [alunosFiltrados, setAlunosFiltrados] = useState<Aluno[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const cardsContainerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const fetchAlunos = async () => {
@@ -53,28 +55,32 @@ export function App() {
       setAlunosFiltrados(alunosfiltrados)
     }
 
-    console.log(search)
     filtrarAlunos()
     }, [search])
+
+  useEffect(() => {
+    if (cardsContainerRef.current) {
+      cardsContainerRef.current.scrollTop = 0
+    }
+  }, [alunosFiltrados])
 
   return (
     <div className='container'>
       <div className='title'>
-        Alunos
+        Sistema de Gestão de Alunos
       </div>
       <SearchBar onSearchChange={setSearch} />
-      {alunosFiltrados.length > 0 ? (
-          alunosFiltrados.map((aluno) => (
-            <div key={aluno.id} style={{
-              padding: 8,
-              borderBottom: "1px solid #ddd",
-            }}>
-              {`${aluno.primeiro_nome} ${aluno.ultimo_nome}`}
-            </div>
-          ))
-        ) : (
-          <p>Nenhum aluno encontrado.</p>
-        )}
+      <div className='cardsPadding' ref={cardsContainerRef}>
+        <div className='cards'>
+          {alunosFiltrados.length > 0 ? (
+              alunosFiltrados.map((aluno) => (
+                  <AlunoCard key={aluno.id} aluno={aluno} />
+              ))
+            ) : (
+              <p>Nenhum aluno encontrado.</p>
+            )}
+        </div>
+      </div>
     </div>
   )
 }
