@@ -68,6 +68,10 @@ body, html, #root {
   gap: 1rem;
 }
 
+.filterHidden {
+  visibility: hidden;
+}
+
 .panel {
   display: flex;
   flex-direction: row;
@@ -75,5 +79,5 @@ body, html, #root {
 }
 
 .centralizado {
-  margin-right: 12.5rem;
+  margin-right: 11.1rem;
 }

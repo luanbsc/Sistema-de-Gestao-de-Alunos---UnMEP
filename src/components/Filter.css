@@ -20,3 +20,8 @@
 .filterTitle {
     font-family: monospace;
 }
+
+.toggle {
+    cursor: pointer;
+    user-select: none;
+}

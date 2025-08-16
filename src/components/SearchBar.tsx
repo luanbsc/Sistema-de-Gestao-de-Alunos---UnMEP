@@ -5,11 +5,22 @@ import { FaFilter } from "react-icons/fa";
 
 interface SearchBarProps {
     onSearchChange: (value: string) => void
+    onPanelFilterClick: (value: boolean) => void
+    filterActivated: boolean
 }
 
-export function SearchBar({ onSearchChange }: SearchBarProps) {
+export function SearchBar({ onSearchChange, onPanelFilterClick, filterActivated }: SearchBarProps) {
 
     const [search, setSearch] = useState('')
+    const [openPanelFilter, setOpenPanelFilter] = useState(false)
+
+    const handlePanelFilter = () => {
+        const novoEstado = !openPanelFilter
+        setOpenPanelFilter(novoEstado)
+        onPanelFilterClick(novoEstado)
+    }
+
+    console.log(filterActivated)
 
     return (
         <div className='searchBar'>
@@ -30,8 +41,11 @@ export function SearchBar({ onSearchChange }: SearchBarProps) {
                     setSearch(event.target.value)
                     onSearchChange(event.target.value)}}
                 />
-                <button className="filterButton">
-                    <FaFilter size={16} />
+                <button className="filterButton" onClick={handlePanelFilter}>
+                    {!filterActivated
+                    ? <FaFilter size={16} />
+                    : <FaFilter size={16} color='green' />
+                    }
                 </button>
             </div>
       </div>

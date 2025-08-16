@@ -24,6 +24,13 @@ export function App() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const cardsContainerRef = useRef<HTMLDivElement>(null)
+  const [panelFilter, setPanelFilter] = useState(false)
+  const [filtros, setFiltros] = useState({
+    aprovados: false,
+    reprovados: false,
+    minMedia: false,
+    maxFaltas: false
+  })
 
   useEffect(() => {
     const fetchAlunos = async () => {
@@ -66,17 +73,19 @@ export function App() {
     }
   }, [alunosFiltrados])
 
+  {console.log(filtros)}
+
   return (
     <div className='container'>
       <div className='title'>
         Sistema de Gestão de Alunos
       </div>
       <div className='panel'>
-        <div className='filter'>
-          <Filter />
+        <div className={panelFilter ? 'filter' : 'filterHidden'}>
+          <Filter onChange={(novoEstado) => setFiltros(novoEstado)} />
         </div>
-        <div className='centralizado'>
-          <SearchBar onSearchChange={setSearch} />
+        <div className={'centralizado'}>
+          <SearchBar onSearchChange={setSearch} onPanelFilterClick={setPanelFilter} filterActivated={Object.values(filtros).some(valor => valor === true)} />
           <div className='containerCards'>
             <div className='titleContainerCards'>
               <HiMiniUserGroup />
