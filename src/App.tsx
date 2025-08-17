@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import { SearchBar } from './components/SearchBar'
+import { SearchBarMinMedia } from './components/SearchBarMinMedia'
+import { SearchBarMaxAbsent } from './components/SearchBarMaxAbsent'
 import { AlunoCard } from './components/AlunoCard'
 import { HiMiniUserGroup } from "react-icons/hi2";
 import { Filter } from './components/Filter'
@@ -18,7 +20,9 @@ export interface Aluno{
 
 export function App() {
 
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState("")
+  const [searchMedia, setSearchMedia] = useState<number | null>(null);
+  const [searchAbsent, setSearchAbsent] = useState("");
   const [alunos, setAlunos] = useState<Aluno[]>([])
   const [alunosFiltrados, setAlunosFiltrados] = useState<Aluno[]>([])
   const [loading, setLoading] = useState(true)
@@ -52,20 +56,62 @@ export function App() {
     }, [])
 
   useEffect(() => {
-    const filtrarAlunos = () => {
-      const alunosfiltrados = alunos.filter((aluno) => {
-        // Se o campo de pesquisa estiver vazio, retorna todos
-        if (!search || search.trim() === ""){
-          return true
-        }
-        return `${aluno.primeiro_nome} ${aluno.ultimo_nome}`.toLowerCase().includes(search.toLowerCase())
-      })
-
-      setAlunosFiltrados(alunosfiltrados)
+    if (filtros.minMedia === false) {
+      setSearchMedia(null)
     }
 
-    filtrarAlunos()
-    }, [search])
+    if (filtros.maxFaltas === false) {
+      setSearchAbsent("")
+    }
+
+  }, [filtros.minMedia, filtros.maxFaltas]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      const alunosfiltrados = alunos.filter((aluno) => {
+        const media = (aluno.nota_1 + aluno.nota_2 + aluno.nota_3 + aluno.nota_4) / 4;
+        const maxFaltas = searchAbsent === "" ? null : Number(searchAbsent)
+
+        // 1) Filtro por nome
+        if (search && search.trim() !== "") {
+          const nomeCompleto = `${aluno.primeiro_nome} ${aluno.ultimo_nome}`.toLowerCase();
+          if (!nomeCompleto.includes(search.toLowerCase())) {
+            return false;
+          }
+        }
+  
+        // 2) Filtro "apenas aprovados"
+        if (filtros.aprovados) {
+          if (!(media >= 7 && aluno.faltas < 7)) {
+            return false;
+          }
+        }
+
+        // 3) Filtro "apenas reprovados"
+        if (filtros.reprovados) {
+          if (!(media < 7 || aluno.faltas >= 7)) {
+            return false;
+          }
+        }
+  
+        // 4) Filtro por máximo de faltas
+        if (maxFaltas !== null && aluno.faltas > maxFaltas) {
+          return false;
+        }
+  
+        // 5) Filtro por média mínima
+        if (searchMedia !== null && media < searchMedia) {
+          return false;
+        }
+  
+        return true;
+      });
+  
+      setAlunosFiltrados(alunosfiltrados);
+    }, 500);
+  
+    return () => clearTimeout(timeoutId);
+  }, [search, alunos, filtros.aprovados, filtros.reprovados, searchAbsent, searchMedia]);
 
   useEffect(() => {
     if (cardsContainerRef.current) {
@@ -73,19 +119,18 @@ export function App() {
     }
   }, [alunosFiltrados])
 
-  {console.log(filtros)}
-
   return (
     <div className='container'>
       <div className='title'>
         Sistema de Gestão de Alunos
       </div>
       <div className='panel'>
-        <div className={panelFilter ? 'filter' : 'filterHidden'}>
-          <Filter onChange={(novoEstado) => setFiltros(novoEstado)} />
-        </div>
         <div className={'centralizado'}>
           <SearchBar onSearchChange={setSearch} onPanelFilterClick={setPanelFilter} filterActivated={Object.values(filtros).some(valor => valor === true)} />
+          <div className='othersSearchBars'>
+            {filtros.minMedia && <SearchBarMinMedia onSearchChange={setSearchMedia} />}
+            {filtros.maxFaltas && <SearchBarMaxAbsent onSearchChange={setSearchAbsent} />}
+          </div>
           <div className='containerCards'>
             <div className='titleContainerCards'>
               <HiMiniUserGroup />
@@ -98,6 +143,9 @@ export function App() {
               ))}
             </div>
           </div>
+        </div>
+        <div className={panelFilter ? 'filter' : 'filterHidden'}>
+          <Filter onChange={(novoEstado) => setFiltros(novoEstado)} />
         </div>
       </div>
       

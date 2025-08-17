@@ -45,7 +45,7 @@ export function Filter({ onChange }: FilterProps) {
       <div className='presets'>
         {filterAprovados
           ? <FaToggleOn className='toggle' size={32} onClick={() => atualizarFiltros({ aprovados: !filterAprovados })} />
-          : <FaToggleOff className='toggle' size={32} onClick={() => atualizarFiltros({ aprovados: !filterAprovados })} />
+          : <FaToggleOff className='toggle' size={32} onClick={() => atualizarFiltros({ aprovados: !filterAprovados, reprovados: false })} />
         }
         <span className='approved'>Aprovados</span>
       </div>
@@ -53,7 +53,7 @@ export function Filter({ onChange }: FilterProps) {
       <div className='presets'>
         {filterReprovados
           ? <FaToggleOn className='toggle' size={32} onClick={() => atualizarFiltros({ reprovados: !filterReprovados })} />
-          : <FaToggleOff className='toggle' size={32} onClick={() => atualizarFiltros({ reprovados: !filterReprovados })} />
+          : <FaToggleOff className='toggle' size={32} onClick={() => atualizarFiltros({ reprovados: !filterReprovados, aprovados: false })} />
         }
         <span className='failed'>Reprovados</span>
       </div>
