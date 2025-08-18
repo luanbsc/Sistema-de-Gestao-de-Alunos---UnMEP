@@ -1,17 +1,31 @@
 import './Filter.css'
 import './AlunoCard.css'
-import { FaToggleOff, FaToggleOn } from "react-icons/fa";
-import { useState } from 'react';
+import { FaToggleOff, FaToggleOn } from "react-icons/fa"
+import { useState } from 'react'
 
 interface FilterProps {
   onChange: (filtros: {
-    aprovados: boolean;
-    reprovados: boolean;
-    minMedia: boolean;
-    maxFaltas: boolean;
+    aprovados: boolean
+    reprovados: boolean
+    minMedia: boolean
+    maxFaltas: boolean
   }) => void
 }
 
+/**
+ * Filter
+ *
+ * Componente que exibe os filtros disponíveis a serem aplicados na busca.
+ * Permite ativar/desativar um filtro.
+ *
+ * Props:
+ * @param onChange - Parâmetro que receberá estado atual dos filtros (ligado/desligado)
+ *
+ * Exemplo de uso:
+ * ```
+ * <Filter onChange={(novoEstado) => setFiltros(novoEstado)} />
+ * ```
+ */
 export function Filter({ onChange }: FilterProps) {
   const [filterAprovados, setFilterAprovados] = useState(false)
   const [filterReprovados, setFilterReprovados] = useState(false)

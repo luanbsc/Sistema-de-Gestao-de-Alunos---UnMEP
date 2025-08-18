@@ -1,15 +1,15 @@
-import { type Aluno } from "../App";
+import { type Aluno } from "../App"
 import './AlunoCard.css'
-import { memo, useState } from "react";
+import { memo, useState } from "react"
 import { Modal } from './Modal'
 
 interface AlunoCardProps {
-    aluno: Aluno;
+    aluno: Aluno
 }
 
 function AlunoCardBase ({ aluno }: AlunoCardProps) {
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
     return (
         <div className='containerCard'>
@@ -65,4 +65,23 @@ function AlunoCardBase ({ aluno }: AlunoCardProps) {
     )
 }
 
-export const AlunoCard = memo(AlunoCardBase);
+/**
+ * AlunoCard
+ *
+ * Componente que exibe as informações de um aluno em formato de cartão.
+ * Permite visualizar nome, notas, faltas e situação (aprovado/reprovado).
+ *
+ * Props:
+ * @param aluno - Objeto do tipo Aluno com as informações do aluno
+ *   - id: número único do aluno
+ *   - primeiro_nome: string
+ *   - ultimo_nome: string
+ *   - nota_1 a nota_4: number
+ *   - faltas: number
+ *
+ * Exemplo de uso:
+ * ```
+ * <AlunoCard aluno={meuAluno} />
+ * ```
+ */
+export const AlunoCard = memo(AlunoCardBase)

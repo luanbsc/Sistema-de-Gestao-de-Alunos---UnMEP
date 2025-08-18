@@ -6,6 +6,19 @@ interface SearchBarMinMediaProps {
     onSearchChange: (value: string) => void
 }
 
+/**
+ * SearchBarMinMedia
+ *
+ * Componente de pesquisa por mínimo de média dos alunos.
+ *
+ * Props:
+ * @param onSearchChange - String atual da caixa de pesquisa
+ *
+ * Exemplo de uso:
+ * ```
+ * <SearchBarMinMedia onSearchChange={setSearchMedia} />
+ * ```
+ */
 export function SearchBarMinMedia({ onSearchChange }: SearchBarMinMediaProps) {
 
     const [search, setSearch] = useState('')

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './SearchBar.css'
 import { FaSearch } from "react-icons/fa"
-import { FaFilter } from "react-icons/fa";
+import { FaFilter } from "react-icons/fa"
 
 interface SearchBarProps {
     onSearchChange: (value: string) => void
@@ -9,6 +9,22 @@ interface SearchBarProps {
     filterActivated: boolean
 }
 
+/**
+ * SearchBar
+ *
+ * Componente de pesquisa por nome de aluno.
+ * Permite pesquisar aluno por nome e abrir o painel de filtros.
+ *
+ * Props:
+ * @param onSearchChange - String atual da caixa de pesquisa
+ * @param onPanelFilterClick - Estado de abertura do painel de filtros
+ * @param filterActivated - Estado de filtro ativo (pelo menos um)
+ *
+ * Exemplo de uso:
+ * ```
+ * <SearchBar onSearchChange={setSearch} onPanelFilterClick={setPanelFilter} filterActivated={false} />
+ * ```
+ */
 export function SearchBar({ onSearchChange, onPanelFilterClick, filterActivated }: SearchBarProps) {
 
     const [search, setSearch] = useState('')

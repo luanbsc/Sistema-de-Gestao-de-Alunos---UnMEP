@@ -1,6 +1,6 @@
 import './Modal.css'
 import './AlunoCard.css'
-import { IoMdClose } from "react-icons/io";
+import { IoMdClose } from "react-icons/io"
 
 interface ModalProps {
     isOpen: boolean
@@ -8,8 +8,19 @@ interface ModalProps {
     aluno: Record<string, any>
 }
 
+/**
+ * Modal
+ *
+ * Componente que exibirá uma caixa em cima de tudo, exibindo mais informações do aluno.
+ *
+ * Props:
+ * @param isOpen - Estado do modal
+ * @param onClose - Ação a ser executada quando fechar o modal
+ * @param aluno - Objeto do tipo Aluno com as informações do aluno
+ *
+ */
 export function Modal({ isOpen, onClose, aluno }: ModalProps) {
-    if (!isOpen) return null;
+    if (!isOpen) return null
 
     return(
         <div className='background' onClick={onClose}>

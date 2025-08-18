@@ -4,7 +4,7 @@ import { SearchBar } from './components/SearchBar'
 import { SearchBarMinMedia } from './components/SearchBarMinMedia'
 import { SearchBarMaxAbsent } from './components/SearchBarMaxAbsent'
 import { AlunoCard } from './components/AlunoCard'
-import { HiMiniUserGroup } from "react-icons/hi2";
+import { HiMiniUserGroup } from "react-icons/hi2"
 import { Filter } from './components/Filter'
 
 export interface Aluno{
@@ -21,8 +21,8 @@ export interface Aluno{
 export function App() {
 
   const [search, setSearch] = useState("")
-  const [searchMedia, setSearchMedia] = useState<number | null>(null);
-  const [searchAbsent, setSearchAbsent] = useState("");
+  const [searchMedia, setSearchMedia] = useState<number | null>(null)
+  const [searchAbsent, setSearchAbsent] = useState("")
   const [alunos, setAlunos] = useState<Aluno[]>([])
   const [alunosFiltrados, setAlunosFiltrados] = useState<Aluno[]>([])
   const [loading, setLoading] = useState(true)
@@ -64,54 +64,54 @@ export function App() {
       setSearchAbsent("")
     }
 
-  }, [filtros.minMedia, filtros.maxFaltas]);
+  }, [filtros.minMedia, filtros.maxFaltas])
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       const alunosfiltrados = alunos.filter((aluno) => {
-        const media = (aluno.nota_1 + aluno.nota_2 + aluno.nota_3 + aluno.nota_4) / 4;
+        const media = (aluno.nota_1 + aluno.nota_2 + aluno.nota_3 + aluno.nota_4) / 4
         const maxFaltas = searchAbsent === "" ? null : Number(searchAbsent)
 
         // 1) Filtro por nome
         if (search && search.trim() !== "") {
-          const nomeCompleto = `${aluno.primeiro_nome} ${aluno.ultimo_nome}`.toLowerCase();
+          const nomeCompleto = `${aluno.primeiro_nome} ${aluno.ultimo_nome}`.toLowerCase()
           if (!nomeCompleto.includes(search.toLowerCase())) {
-            return false;
+            return false
           }
         }
   
         // 2) Filtro "apenas aprovados"
         if (filtros.aprovados) {
           if (!(media >= 7 && aluno.faltas < 7)) {
-            return false;
+            return false
           }
         }
 
         // 3) Filtro "apenas reprovados"
         if (filtros.reprovados) {
           if (!(media < 7 || aluno.faltas >= 7)) {
-            return false;
+            return false
           }
         }
   
         // 4) Filtro por máximo de faltas
         if (maxFaltas !== null && aluno.faltas > maxFaltas) {
-          return false;
+          return false
         }
   
         // 5) Filtro por média mínima
         if (searchMedia !== null && media < searchMedia) {
-          return false;
+          return false
         }
   
-        return true;
-      });
+        return true
+      })
   
-      setAlunosFiltrados(alunosfiltrados);
+      setAlunosFiltrados(alunosfiltrados)
     }, )
   
-    return () => clearTimeout(timeoutId);
-  }, [search, alunos, filtros.aprovados, filtros.reprovados, searchAbsent, searchMedia]);
+    return () => clearTimeout(timeoutId)
+  }, [search, alunos, filtros.aprovados, filtros.reprovados, searchAbsent, searchMedia])
 
   useEffect(() => {
     if (cardsContainerRef.current) {

@@ -6,6 +6,20 @@ interface SearchBarMaxAbsentProps {
     onSearchChange: (value: string) => void
 }
 
+
+/**
+ * SearchBarMaxAbsent
+ *
+ * Componente de pesquisa por máximo de faltas dos alunos.
+ *
+ * Props:
+ * @param onSearchChange - String atual da caixa de pesquisa
+ *
+ * Exemplo de uso:
+ * ```
+ * <SearchBarMaxAbsent onSearchChange={setSearchAbsent} />
+ * ```
+ */
 export function SearchBarMaxAbsent({ onSearchChange }: SearchBarMaxAbsentProps) {
 
     const [search, setSearch] = useState('')
