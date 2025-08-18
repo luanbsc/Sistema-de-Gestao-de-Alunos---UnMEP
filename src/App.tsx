@@ -108,7 +108,7 @@ export function App() {
       });
   
       setAlunosFiltrados(alunosfiltrados);
-    }, 500);
+    }, )
   
     return () => clearTimeout(timeoutId);
   }, [search, alunos, filtros.aprovados, filtros.reprovados, searchAbsent, searchMedia]);
@@ -136,7 +136,9 @@ export function App() {
               <HiMiniUserGroup />
               <span>Alunos</span>
             </div>
-            <span className='results'>{alunosFiltrados.length} alunos encontrados</span>
+            {alunosFiltrados.length !== 1
+            ? <span className='results'>{alunosFiltrados.length} alunos encontrados</span>
+            : <span className='results'>{alunosFiltrados.length} aluno encontrado</span>}
             <div className='cards' ref={cardsContainerRef}>
               {alunosFiltrados.map((aluno) => (
                 <AlunoCard key={aluno.id} aluno={aluno} />
@@ -148,9 +150,6 @@ export function App() {
           <Filter onChange={(novoEstado) => setFiltros(novoEstado)} />
         </div>
       </div>
-      
-      
     </div>
   )
 }
-

@@ -1,15 +1,24 @@
 import { type Aluno } from "../App";
 import './AlunoCard.css'
+import { memo, useState } from "react";
+import { Modal } from './Modal'
 
 interface AlunoCardProps {
     aluno: Aluno;
 }
 
-export function AlunoCard ({ aluno }: AlunoCardProps) {
+function AlunoCardBase ({ aluno }: AlunoCardProps) {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <div className='containerCard'>
-          <div className='cardsShape'>
+          <Modal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            aluno={aluno}
+          />
+          <div className='cardsShape' onClick={() => setIsModalOpen(true)}>
             <div className='titleCard'>
               <span className='studentName'>{aluno.primeiro_nome} {aluno.ultimo_nome}</span>
               {(aluno.nota_1 + aluno.nota_2 + aluno.nota_3 + aluno.nota_4)/4 >= 7 && aluno.faltas < 7
@@ -54,5 +63,6 @@ export function AlunoCard ({ aluno }: AlunoCardProps) {
           </div>
         </div>
     )
-
 }
+
+export const AlunoCard = memo(AlunoCardBase);

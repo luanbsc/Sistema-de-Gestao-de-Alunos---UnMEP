@@ -1,0 +1,68 @@
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContainer {
+    position: relative;
+    margin-bottom: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    width: 35rem;
+    height: 15rem;
+    gap: 4rem;
+    border-radius: 6px;
+}
+
+.closeButton {
+    position: absolute;
+    top: 0rem;
+    right: 0rem;
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.closeButton:hover {
+    color: white;
+    background-color: red;
+}
+
+.titleModal {
+    margin-top: 2rem;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.studentStatus {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.line {
+    width: 90%;
+    height: 1px;
+    background-color: rgb(219, 219, 219);
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 0.5rem;
+}
